@@ -8,7 +8,7 @@
 
 // 요청에 따른 라우트의 매핑 정의
 const routeRespMap = {
-    "/":"<h1>home Page</h1><p>welcome to my page</p>",
+    "/hello":"<h1>home Page</h1><p>welcome to my page</p>",
     "/about":"<h1>About Page</h1><p>welcome to my page</p>",
     "/info":"<h1>info Page</h1><p>welcome to my page</p>",
     "/contact":"<h1>contact Page</h1><p>contact to my page</p>",
@@ -27,10 +27,10 @@ const port = 3000,
 app.on("request", (req,res) => {
     res.writeHead(httpStatus.OK,{
         "Content-Type":"text/html",
-    })
-    if(routeRespMap[res.url]){// "about"
-        setTimeout(()=>{
-            res.end(routeRespMap[res.url]);
+    });
+    if(routeRespMap[req.url]){// "about"
+        setTimeout(() => {
+            res.end(routeRespMap[req.url]);
         },2000);    
     
         
@@ -48,7 +48,6 @@ if(process.env.NODE_ENV !=='test'){
     console.log('Server at : http://localhost:${port}')
 }
 
-app.listen(port);
 
 // listing5.7.js에서 (p. 98)
 // 수동으로 응답에 지연을 걸기 위한 코드 감싸기
