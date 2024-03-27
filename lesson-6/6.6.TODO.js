@@ -19,8 +19,10 @@ const port        = 3000,
   },
   // 코드 반복을 줄이기 위한 변경된 readFile 함수의 생성
   customReadFile = (file_path,res) => {
-    fs.readFile('./${file_path}',(err,data) => {
-      if(err) console.log("Error reading file : " + err);
+    fs.readFile(`./${file_path}`,(err,data) => {
+      if(err) {
+        console.log("Error reading file : " + err)
+      };
     res.end(data);
     });
     
@@ -34,7 +36,7 @@ router.get("/", (req,res)=>{
 
 router.get("/index.html", (req,res)=>{
   res.writeHead(httpStatusCodes.OK,plainTextContentType);
-  customReadFile("./views/index.html",res);
+  customReadFile("views/index.html",res);
   
 }); // '/index.html'
 
@@ -48,6 +50,6 @@ const app = http.createServer(router.handle);
 if(process.env.NODE_ENV !== "test")
   app.listen(port);
 
-console.log('Server at : http://localpost:${port}');
+console.log(`Server at : http://localpost:${port}`);
 
 module

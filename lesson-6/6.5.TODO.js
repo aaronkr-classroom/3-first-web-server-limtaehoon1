@@ -8,7 +8,7 @@
  */
 const httpStatus = require('http-status-codes'),
   
-  htmlContentType,{
+  htmlContentType={
     "Content-Type" : "text/html"
 
   }
@@ -16,9 +16,11 @@ const httpStatus = require('http-status-codes'),
   routes ={
     GET:{
       "/info":(req,res) => {
-        res.writeHead(httpStatus,htmlContentType)
+        res.writeHead(httpStatus.OK,{
+          "Content-Type": "text/plain"
+        });
         res.end("Welcome to the INFO page!");
-      },
+      }
     },
     POST: {}
   };
@@ -46,7 +48,7 @@ exports.get = (url,action) => {
 exports.post= (url,action) => {
   routes["POST"][url] = action;
 };
-;
+
 
 // <<< 나머진 라우트 코드 입력 하십시오 >>>
 
